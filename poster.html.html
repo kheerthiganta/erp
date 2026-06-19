@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Student Attendance Management System Poster</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #dff7ff, #eef5ff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 30px;
+    }
+
+    .poster {
+      width: 850px;
+      min-height: 1100px;
+      background: white;
+      border-radius: 30px;
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.18);
+      position: relative;
+    }
+
+    .top-section {
+      background: linear-gradient(135deg, #1d4ed8, #2563eb, #38bdf8);
+      color: white;
+      padding: 55px 50px 75px;
+      text-align: center;
+      position: relative;
+    }
+
+    .tag {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.25);
+      padding: 8px 22px;
+      border-radius: 30px;
+      font-size: 15px;
+      letter-spacing: 1px;
+      margin-bottom: 18px;
+      font-weight: bold;
+    }
+
+    h1 {
+      font-size: 48px;
+      line-height: 1.15;
+      margin-bottom: 18px;
+      text-transform: uppercase;
+    }
+
+    .subtitle {
+      font-size: 20px;
+      max-width: 680px;
+      margin: auto;
+      line-height: 1.6;
+    }
+
+    .circle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .circle.one {
+      width: 120px;
+      height: 120px;
+      top: 30px;
+      left: 40px;
+    }
+
+    .circle.two {
+      width: 90px;
+      height: 90px;
+      right: 55px;
+      bottom: 35px;
+    }
+
+    .content {
+      padding: 45px 50px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 28px;
+      color: #1d4ed8;
+      margin-bottom: 28px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+      margin-bottom: 42px;
+    }
+
+    .card {
+      background: #f4f9ff;
+      border: 2px solid #dbeafe;
+      border-radius: 20px;
+      padding: 24px;
+      min-height: 145px;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.15);
+    }
+
+    .icon {
+      font-size: 34px;
+      margin-bottom: 12px;
+    }
+
+    .card h3 {
+      color: #1e3a8a;
+      font-size: 21px;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      color: #444;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, #dbeafe, #e0f2fe);
+      border-radius: 25px;
+      padding: 32px;
+      margin-bottom: 38px;
+      text-align: center;
+    }
+
+    .highlight-box h2 {
+      color: #1e40af;
+      font-size: 27px;
+      margin-bottom: 12px;
+    }
+
+    .highlight-box p {
+      color: #333;
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .modules {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 42px;
+    }
+
+    .module {
+      background: #eff6ff;
+      color: #1e3a8a;
+      padding: 14px 10px;
+      border-radius: 14px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 14px;
+      border: 1px solid #bfdbfe;
+    }
+
+    .tech-section {
+      background: #0f172a;
+      color: white;
+      padding: 30px;
+      border-radius: 25px;
+      margin-bottom: 35px;
+    }
+
+    .tech-section h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 26px;
+      color: #93c5fd;
+    }
+
+    .tech-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .tech-list span {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 10px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .footer {
+      background: #1d4ed8;
+      color: white;
+      padding: 25px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 16px;
+    }
+
+    .footer strong {
+      color: #dbeafe;
+    }
+
+    .badge {
+      background: white;
+      color: #1d4ed8;
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-weight: bold;
+    }
+
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+      }
+
+      .poster {
+        box-shadow: none;
+        border-radius: 0;
+        width: 100%;
+        min-height: 100vh;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="poster">
+
+    <div class="top-section">
+      <div class="circle one"></div>
+      <div class="circle two"></div>
+
+      <div class="tag">Academic Project</div>
+
+      <h1>Smart Student Attendance Management System</h1>
+
+      <p class="subtitle">
+        A smart digital attendance system designed to automate student attendance,
+        reduce manual work, generate reports, and improve classroom management efficiency.
+      </p>
+    </div>
+
+    <div class="content">
+
+      <h2 class="section-title">Core Features</h2>
+
+      <div class="features">
+
+        <div class="card">
+          <div class="icon">🧑‍🎓</div>
+          <h3>Student Registration</h3>
+          <p>
+            Store and manage student information including roll numbers,
+            departments, and attendance records.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="icon">📅</div>
+          <h3>Attendance Tracking</h3>
+          <p>
+            Automatically mark and manage daily attendance for students
+            in an efficient and accurate manner.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="icon">📊</div>
+          <h3>Attendance Reports</h3>
+          <p>
+            Generate attendance summaries, monthly reports,
+            and student-wise attendance statistics.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🔔</div>
+          <h3>Notifications</h3>
+          <p>
+            Send alerts to students regarding low attendance
+            and important updates.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="icon">☁</div>
+          <h3>Cloud Database</h3>
+          <p>
+            Securely store attendance records and access them anytime
+            through a centralized database.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🔒</div>
+          <h3>Secure Login</h3>
+          <p>
+            Provide role-based access for administrators,
+            teachers, and students.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="highlight-box">
+        <h2>Project Objective</h2>
+
+        <p>
+          To develop an efficient attendance management platform that minimizes
+          paperwork, improves accuracy, saves faculty time, and enables
+          real-time attendance monitoring for educational institutions.
+        </p>
+      </div>
+
+      <h2 class="section-title">Modules to Implement</h2>
+
+      <div class="modules">
+        <div class="module">Admin Login</div>
+        <div class="module">Student Login</div>
+        <div class="module">Faculty Login</div>
+        <div class="module">Dashboard</div>
+        <div class="module">Student Database</div>
+        <div class="module">Attendance Marking</div>
+        <div class="module">Attendance Reports</div>
+        <div class="module">Notifications</div>
+        <div class="module">Profile Management</div>
+        <div class="module">Data Storage</div>
+        <div class="module">Analytics</div>
+        <div class="module">Settings</div>
+      </div>
+
+      <div class="tech-section">
+        <h2>Tools & Technologies</h2>
+
+        <div class="tech-list">
+          <span>HTML5</span>
+          <span>CSS3</span>
+          <span>JavaScript</span>
+          <span>Bootstrap</span>
+          <span>PHP</span>
+          <span>MySQL</span>
+          <span>Node.js</span>
+          <span>React.js</span>
+          <span>REST APIs</span>
+          <span>Firebase</span>
+          <span>Cloud Storage</span>
+          <span>GitHub</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer">
+      <div>
+        <strong>Developed For:</strong>
+        Smart Educational Institutions
+      </div>
+
+      <div class="badge">
+        Smart Attendance • Smart Future
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

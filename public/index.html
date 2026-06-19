@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Student Attendance Management System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand">
+          <p class="brand-mark">AttendEase</p>
+          <p class="brand-tag">Student Attendance Management System</p>
+        </div>
+        <div class="auth-meter">
+          <span class="dot" id="authDot"></span>
+          <span id="authState">Guest mode</span>
+          <button id="logoutBtn" class="btn btn-ghost" type="button">Log Out</button>
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="overview-zone" id="overviewZone">
+          <div class="section-head">
+            <h1>Attendance Dashboard</h1>
+            <p>Register students, mark daily attendance, and review class-wise attendance performance.</p>
+          </div>
+
+          <div class="metric-grid">
+            <article class="metric-card">
+              <span class="metric-label">Students</span>
+              <strong id="studentCount">0</strong>
+            </article>
+            <article class="metric-card">
+              <span class="metric-label">Present Today</span>
+              <strong id="presentCount">0</strong>
+            </article>
+            <article class="metric-card">
+              <span class="metric-label">Absent Today</span>
+              <strong id="absentCount">0</strong>
+            </article>
+            <article class="metric-card">
+              <span class="metric-label">Late Today</span>
+              <strong id="lateCount">0</strong>
+            </article>
+          </div>
+
+          <section class="panel" id="authPanel">
+            <div class="section-head">
+              <h2>Teacher Access</h2>
+              <p>Create a teacher account or sign in to manage attendance records.</p>
+            </div>
+
+            <div id="authChooser" class="panel-grid two-col">
+              <button id="showRegisterBtn" class="btn btn-main" type="button">Register</button>
+              <button id="showLoginBtn" class="btn btn-ghost" type="button">Login</button>
+            </div>
+
+            <div id="registerWrap" hidden>
+              <form id="registerForm" class="form-block">
+                <h3>Create teacher account</h3>
+                <label>Name <input name="name" type="text" placeholder="Teacher name" required></label>
+                <label>Email <input name="email" type="email" placeholder="teacher@example.com" required></label>
+                <label>Password <input name="password" type="password" placeholder="******" required></label>
+                <label>CAPTCHA code <input id="registerCaptchaCode" type="text" readonly></label>
+                <label>Enter CAPTCHA <input id="registerCaptchaInput" type="text" placeholder="Type the CAPTCHA code" required></label>
+                <div class="action-row">
+                  <button id="refreshRegisterCaptchaBtn" class="btn btn-ghost" type="button">Refresh</button>
+                  <button class="btn btn-main" type="submit">Register</button>
+                  <button id="backFromRegisterBtn" class="btn btn-ghost" type="button">Back</button>
+                </div>
+              </form>
+            </div>
+
+            <div id="loginWrap" hidden>
+              <form id="loginForm" class="form-block">
+                <h3>Sign in</h3>
+                <label>Email <input name="email" type="email" placeholder="teacher@example.com" required></label>
+                <label>Password <input name="password" type="password" placeholder="******" required></label>
+                <label>CAPTCHA code <input id="loginCaptchaCode" type="text" readonly></label>
+                <label>Enter CAPTCHA <input id="loginCaptchaInput" type="text" placeholder="Type the CAPTCHA code" required></label>
+                <div class="action-row">
+                  <button id="refreshLoginCaptchaBtn" class="btn btn-ghost" type="button">Refresh</button>
+                  <button class="btn btn-main" type="submit">Login</button>
+                  <button id="backFromLoginBtn" class="btn btn-ghost" type="button">Back</button>
+                </div>
+              </form>
+            </div>
+          </section>
+        </section>
+
+        <section class="control-zone" id="managementZone">
+          <section class="panel">
+            <div class="section-head split-head">
+              <div>
+                <h2>Students</h2>
+                <p>Add student details and filter records by class.</p>
+              </div>
+              <button id="refreshStudentsBtn" class="btn btn-ghost" type="button">Refresh</button>
+            </div>
+
+            <form id="studentForm" class="form-inline">
+              <label>Roll No <input name="rollNo" type="text" placeholder="23CS001" required></label>
+              <label>Name <input name="name" type="text" placeholder="Student name" required></label>
+              <label>Class <input name="className" type="text" placeholder="CSE-A" required></label>
+              <label>Email <input name="email" type="email" placeholder="student@example.com"></label>
+              <button class="btn btn-main" type="submit">Add Student</button>
+            </form>
+
+            <form id="filterForm" class="form-inline compact-form">
+              <label>Class Filter <input name="className" type="text" placeholder="All classes"></label>
+              <button class="btn btn-ghost" type="submit">Apply Filter</button>
+            </form>
+
+            <div id="studentList" class="list"></div>
+          </section>
+
+          <section class="panel">
+            <div class="section-head split-head">
+              <div>
+                <h2>Daily Attendance</h2>
+                <p>Choose a date, update statuses, and save the attendance sheet.</p>
+              </div>
+              <button id="loadAttendanceBtn" class="btn btn-ghost" type="button">Load</button>
+            </div>
+
+            <form id="attendanceOptions" class="form-inline compact-form">
+              <label>Date <input id="attendanceDate" name="attendanceDate" type="date" required></label>
+              <label>Class <input id="attendanceClass" name="attendanceClass" type="text" placeholder="All classes"></label>
+              <button class="btn btn-main" type="submit">View Sheet</button>
+            </form>
+
+            <form id="attendanceForm" class="attendance-sheet">
+              <div id="attendanceRows" class="list"></div>
+              <button id="saveAttendanceBtn" class="btn btn-main" type="submit">Save Attendance</button>
+            </form>
+          </section>
+
+          <section class="panel">
+            <div class="section-head split-head">
+              <div>
+                <h2>Attendance Report</h2>
+                <p>View present, absent, late, and percentage totals.</p>
+              </div>
+              <button id="refreshReportBtn" class="btn btn-ghost" type="button">Refresh</button>
+            </div>
+            <div id="reportList" class="list"></div>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <div id="flash" class="flash" role="status" aria-live="polite"></div>
+    <script src="./app.js"></script>
+  </body>
+</html>
