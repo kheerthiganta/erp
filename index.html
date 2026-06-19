@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EduTrack — Attendance Management System</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- ============================================================ AUTH ============================================================ -->
+<div class="auth-wrap" id="authWrap">
+  <div class="auth-box" id="authBox">
+    <div class="auth-logo">
+      <div class="logo-icon">🎓</div>
+      <h1>EduTrack</h1>
+      <p>Student Attendance Management System</p>
+    </div>
+    <div id="alertBox"></div>
+
+    <!-- LOGIN -->
+    <div id="loginForm">
+      <p class="auth-title">Welcome back</p>
+      <p class="auth-sub">Sign in to your account to continue</p>
+      <div class="role-tabs">
+        <div class="role-tab active" data-role="admin" onclick="selectRole(this,'admin')"><span>👑</span>Admin</div>
+        <div class="role-tab" data-role="faculty" onclick="selectRole(this,'faculty')"><span>👨‍🏫</span>Faculty</div>
+        <div class="role-tab" data-role="student" onclick="selectRole(this,'student')"><span>🎓</span>Student</div>
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" id="loginEmail" placeholder="Enter your email" />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="loginPassword" placeholder="Enter your password" />
+      </div>
+      <button class="btn-primary" onclick="handleLogin()">Sign In</button>
+      <div class="auth-switch">
+        Don't have an account? <a onclick="showRegister()">Create Account</a>
+      </div>
+    </div>
+
+    <!-- REGISTER -->
+    <div id="registerForm" style="display:none">
+      <p class="auth-title">Create Account</p>
+      <p class="auth-sub">Join EduTrack as a faculty or student</p>
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" id="regName" placeholder="Your full name" />
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" id="regEmail" placeholder="Your email" />
+      </div>
+      <div class="form-group">
+        <label>Role</label>
+        <select id="regRole">
+          <option value="faculty">Faculty</option>
+          <option value="student">Student</option>
+        </select>
+      </div>
+      <div class="form-group" id="regClassGroup" style="display:none">
+        <label>Class / Roll Number</label>
+        <input type="text" id="regClass" placeholder="e.g., CS-A / Roll No. 101" />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="regPassword" placeholder="Create a password" />
+      </div>
+      <button class="btn-primary" onclick="handleRegister()">Create Account</button>
+      <div class="auth-switch">
+        Already have an account? <a onclick="showLogin()">Sign In</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ APP ============================================================ -->
+<div class="app" id="appWrap">
+  <!-- SIDEBAR -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon">🎓</div>
+      <div><h2>EduTrack</h2><p>Attendance System</p></div>
+    </div>
+    <div class="sidebar-user">
+      <div class="user-avatar" id="sidebarAvatar" style="background:#2563eb"></div>
+      <div class="user-info">
+        <p id="sidebarName">—</p>
+        <span id="sidebarRole">—</span>
+      </div>
+    </div>
+    <div class="sidebar-nav" id="sidebarNav"></div>
+    <div class="sidebar-footer">
+      <button class="btn-logout" onclick="handleLogout()">⬅ Sign Out</button>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="main" id="mainContent"></main>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- ADD STUDENT MODAL -->
+<div class="modal-overlay" id="addStudentModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('addStudentModal')">✕</button>
+    <h3>Add New Student</h3>
+    <div class="form-group"><label>Full Name</label><input type="text" id="newStudentName" placeholder="Student's full name"></div>
+    <div class="form-group"><label>Roll Number</label><input type="text" id="newStudentRoll" placeholder="e.g. 101"></div>
+    <div class="form-group"><label>Email</label><input type="email" id="newStudentEmail" placeholder="student@email.com"></div>
+    <div class="form-group"><label>Class</label>
+      <select id="newStudentClass">
+        <option>CS-A</option><option>CS-B</option><option>ECE-A</option><option>ME-A</option>
+      </select>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-sm btn-outline" onclick="closeModal('addStudentModal')">Cancel</button>
+      <button class="btn-sm btn-blue" onclick="saveNewStudent()">Add Student</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD FACULTY MODAL -->
+<div class="modal-overlay" id="addFacultyModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('addFacultyModal')">✕</button>
+    <h3>Add Faculty Member</h3>
+    <div class="form-group"><label>Full Name</label><input type="text" id="newFacultyName" placeholder="Faculty name"></div>
+    <div class="form-group"><label>Email</label><input type="email" id="newFacultyEmail" placeholder="faculty@edu.com"></div>
+    <div class="form-group"><label>Department</label>
+      <select id="newFacultyDept">
+        <option>Computer Science</option><option>Electronics</option><option>Mechanical</option><option>Mathematics</option>
+      </select>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-sm btn-outline" onclick="closeModal('addFacultyModal')">Cancel</button>
+      <button class="btn-sm btn-blue" onclick="saveNewFaculty()">Add Faculty</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
